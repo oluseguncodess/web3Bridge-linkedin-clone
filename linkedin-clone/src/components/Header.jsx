@@ -91,7 +91,10 @@ const Container = styled.div`
   top: 0;
   width: 100vw;
   z-index: 100;
-  padding: 10px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Content = styled.div`
