@@ -1,12 +1,34 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import PostModal from './PostModal'
 
 const Main = (props) => {
+    const [showModal, setShowModal] = useState("close");
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        if(e.target !== e.currentTarget) {
+            return;
+        }
+
+        switch (showModal) {
+            case "open":
+                setShowModal("close");
+                break;
+            case "close":
+                setShowModal("open");
+                break;
+            default: 
+                setShowModal("close");
+                break; 
+        }
+    }
     return (
         <Container>
             <ShareBox>
                 <div>
                     <img src="images/user.svg" alt="user-image" />
-                    <button>Start a post</button>
+                    <button onClick={handleClick}>Start a post</button>
                 </div>
 
                 <div>
@@ -48,7 +70,7 @@ const Main = (props) => {
                     <SocialCounts>
                         <li>
                             <button>
-                                <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" alt="like=icon" />
+                                <img src="images/package-lock.png" alt="like=icon" />
                                 <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" alt="like=icon" />
                                 <span>75</span>
                             </button>
@@ -79,6 +101,7 @@ const Main = (props) => {
                     </SocialActions>
                 </Article>
             </div>
+            <PostModal showModal={showModal} handleClick={handleClick}/>
         </Container>
     );
 }
@@ -236,6 +259,11 @@ list-style: none;
             display: flex;
             align-items: center;
         }
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
     }
 `;
 
